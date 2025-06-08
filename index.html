@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil Saya</title>
+  
+  <!-- SweetAlert2 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+      overflow: hidden;
+    }
+    .container {
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 400px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .container:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+    img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #fff;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease;
+    }
+    img:hover {
+      transform: scale(1.1);
+    }
+    h1 {
+      font-size: 2em;
+      margin: 15px 0;
+      font-weight: 700;
+    }
+    p {
+      font-size: 1.1em;
+      margin-bottom: 25px;
+      opacity: 0.8;
+    }
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      background-color: #fff;
+      color: #0072ff;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1em;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transform: scale(1);
+    }
+    .links a i {
+      margin-right: 10px;
+    }
+    .links a:hover {
+      background-color: #0072ff;
+      color: #fff;
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+    .links a:active {
+      transform: scale(1);
+    }
+
+    /* Tombol untuk berhenti musik */
+  </style>
+</head>
+<body>
+  <!-- SweetAlert2 popup -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+
+  <!-- Audio yang akan dimainkan -->
+  <audio id="background-audio">
+    <source src="DJ STECU STECU SETELAN CUEK BARU MALU SLOW VIRAL TIKTOK FULL SONG MAMAN FVNDY 2025 - Maman Fvndy Rmx.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="container">
+    <img src="okarun.jpg" alt="Foto Profil" />
+    <h1>Mory Stwn</h1>
+    <p> Public Speaking | Entrepreneur | Motivator | Ayo Berkreasi!</p>
+    <div class="links">
+      <a href="https://wa.me/6285768089233" target="_blank">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+      <a href="https://www.instagram.com/morystwn?igsh=MXo5YWZlcjNkbjg1" target="_blank">
+        <i class="fab fa-instagram"></i> Instagram
+      </a>
+      <a href="https://morystwn.github.io/Portofolio-MoryStwn/?fbclid=PAQ0xDSwKyD4hleHRuA2FlbQIxMQABp9AogLZdqN38fcPgPNDlZAB53nGzeKvYM8LQzddIZdzuQmGoQu4sPQabFtSf_aem_k9A4AJ9jJwQ46L1BQcZzOw" target="_blank">
+        <i class="fa-solid fa-address-book"></i> Portofolio
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Fungsi untuk menampilkan SweetAlert dan memutar audio jika disetujui
+    Swal.fire({
+      title: 'Izinkan pemutaran musik?',
+      text: "Kami ingin memutar lagu favorit saat kamu mengunjungi halaman ini.",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Setuju',
+      cancelButtonText: 'Tidak Setuju',
+      reverseButtons: true
+    }).then((result) => {
+      const audio = document.getElementById('background-audio');
+      
+      if (result.isConfirmed) {
+        // Jika pengguna klik "Setuju", play audio
+        audio.play();
+
+        // Tombol berhenti musik
+        document.getElementById('stop-music-btn').onclick = function() {
+          audio.pause();  // Pause audio
+          audio.currentTime = 0;  // Reset ke awal lagu
+          Swal.fire('Musik dihentikan!', '', 'success');
+        };
+      } else {
+        // Jika pengguna klik "Tidak Setuju", tampilkan pesan
+        Swal.fire(
+          'Dibatalkan!',
+          'Tidak ada musik yang diputar.',
+          'error'
+        );
+      }
+    });
+  </script>
+</body>
+</html>
